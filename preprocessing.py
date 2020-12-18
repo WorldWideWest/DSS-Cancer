@@ -19,14 +19,14 @@ class Preprocessing():
         self.mainFolder = mainFolder
 
     def CheckImages(self, folderPath):
-        for filename in os.path.join(self.mainFolder, folderPath):
-            if filename.endswith(".png"):
-                image = cv.imread(filename)
-                width = image[1]
-                height = image[0]
-                if width != 50 or height != 50:
-                    os.delete(image)
-                    print(os.path.join(self.mainFolder, folderPath), image)
+        folder = os.path.join(self.mainFolder, folderPath)
+        images = []
+        for filename in os.listdir(folder):
+            image = cv.imread(os.path.join(folder, filename))
+            if image.shape != (50, 50, 3):
+                print(f"{os.path.join(folder, filename)}\t {image.shape}")
+                os.remove(os.path.join(folder, filename))
+            
 
     def DataReader(self, folder):
         dataSet = ImageFolder(self.mainFolder + folder, transform = ToTensor())
