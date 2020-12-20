@@ -1,6 +1,8 @@
+import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
+from torch.optim import Adam
+from tqdm import tqdm
 
 class Network(nn.Module):
     def __init__(self):
@@ -94,9 +96,10 @@ class Network(nn.Module):
         return x
 
 
-class Predictions():
+class Trainer():
     def __init__(self):
         pass
 
     def Correct(self, predictions, labels):
         return predictions.argmax(dim = 1).eq(labels).sum().item()
+
