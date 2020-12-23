@@ -38,7 +38,18 @@ Ok, ali šta su sad ove linije koje povezuju ove neurone? Te linije predstavljaj
 
 Ali tu priča o tim linearnim regresijama u okviru neuralnih mreža ne staje, dodavati linearnu regresiju jednu na drugu nema smisla dobit ćemo neke random rezultate koji nam neće ništa govoriti. Zato ćemo sad uvesti još jedan hyperparametar, a on se zove aktivacijska funkcija. <a href="https://missinglink.ai/guides/neural-network-concepts/7-types-neural-network-activation-functions-right/">Aktivacijska funkcija</a> daje nelinearnost našim neuronima, što u konačnici donosi dobre rezultate. 
 
+Sad kad znamo kako naš algoritam predviđa vrijednosti moramo se zapitati kako on prilagođava parametre kako bi dobio tačnu vrijednost? Odgovor na ovo pitanje ćemo naći u hyperparametrima optimizatora i loss funkcije (funkcije gubitka ili troškovne funkcije). 
 
+Šta je to optimizator?
+Kao što sama riječ govori optimizator optimizira određenu vrijednost, a ona se zove (weight) ili presijek ragresione linije. Da bi se vrijednosti unapređivale potrebna nam je loss funkcija, koja će to biti ovisi od našeg izbora, ona kalkulira naš promašaj. Sad kad imamo optimizator i loss funkciju potraban nam je još jedan hyperparametar, a on se zove learnig rate (stopa učenja). Stopom učenja radimo optimizaciju naših weightova na osnovu loss funkcije, a ovaj proces se naziva backpropagation.
+
+Sve OK, ali kako možemo fotografiju ubaciti u ovaj algoritam, zar slika ima bilo kakve numeričke vrijednosti? Kada gledamo sliku (mi ljudi) mi vidimo boje i oblike, ali kada računar gleda sliku on vidi trodimenzijalnu matricu ili TENSOR. Svaka matrica ima svoju boju, a to su tri osnovne boje (RGB standard):
+
+1. Crvena
+2. Zelena 
+3. Plava
+
+Da bi transformirali ovaj tensor u vektor moramo uraditi konvoluciju tensora, a šta znači to? To je proces kojim se smanjuje dimenzija tensora uz unapređivanje weigtova, na taj način naš alogritam uči.
 
 ## Koraci izvršenja DL projekta
 
@@ -49,26 +60,6 @@ Ali tu priča o tim linearnim regresijama u okviru neuralnih mreža ne staje, do
 * Selektovanje modela i treniranje
 * Podešavanje modela
 * Prezentiranje riješenja
-
-
-<details>
-  <summary>Posmatranje šire slike</summary>
-  <p>
-    Naš problem predstavlja validaciju doktorovog mošljenja, svi smo mi ljudi, a ljudi griješe, ovim projektom želimo smanjiti ljudske greške na minimum. U ovom slučaju budući da imamo dataset koristit ćemo supervizioni način dubokog učenja. Budući da imamo bazu podataka naših fotografija upoređivat ćemo dobijene rezultate iz neuralne mreže sa stvarnim rezultatima.
-  </p>
-
-  <label for="gig_pic">Status</label>
-  <progress id="big_pic" value=100 max=100>100%</progress>	✅
-</details>
-
-<details>
-  <summary>Pribavljanje podataka</summary>
-  <p>
-    Dataset koji imamo je pribavljen sa <a href="www.kaggle.com">Kaggle</a>
-  </p>
-  <label for="gig_pic">Status</label>
-  <progress id="big_pic" value=100 max=100>100%</progress>	✅
-</details>
 
 <table>
   <thead>
@@ -88,19 +79,19 @@ Ali tu priča o tim linearnim regresijama u okviru neuralnih mreža ne staje, do
     </tr>
     <tr>
      <td>Čišćenje i vizueliziranje podataka</td>
-     <td>❌</td>
+     <td>✅</td>
     </tr>
     <tr>
      <td>Priprema podataka za DL algoritam</td>
-     <td>❌</td>
+     <td>✅</td>
     </tr>
     <tr>
      <td>Selektovanje modela i treniranje</td>
-     <td>❌</td>
+     <td>✅</td>
     </tr>
     <tr>
      <td>Podešavanje modela</td>
-     <td>❌</td>
+     <td>✅</td>
     </tr>
     <tr>
      <td>Prezentiranje riješenja</td>
@@ -113,41 +104,6 @@ Ali tu priča o tim linearnim regresijama u okviru neuralnih mreža ne staje, do
 
 U okivru ovog projekta kreirati samo riješenje ovog problema nije jedini zadatak, tako da imamo i druge zadatke:
 
-<details>
-<summary>Kreiranje riješenja ❌</summary>
-  <p>
-    Kreiranje algoritma koji će klasificirati snimke tumora dojke.
-    Osoba koja će raditi na ovom dijelu
-    <a href="www.github.com/WorldWideWest">@Dženan Džafić</a>
-  </p>
-  <progress value=0 max=100>
-</details>
-
-<details>
-<summary>Uvod u Deep Learning ❌</summary>
-  <p>
-    Način funkcionisanja neuralnih mreža
-    Osoba koja će raditi na ovom dijelu
-    <a href="www.github.com/WorldWideWest">@Dženan Džafić</a>
-  </p>
-  <progress value=0 max=100>
-</details>
-
-<details>
-<summary>Tematika tumora dojke❌</summary>
-  <p>
-    Osoba/e koja će raditi na ovom dijelu
-  </p>
-  <progress value=0 max=100>
-</details>  
-
-<details>
-<summary>Kreiranje dokumentacije i prezentacije ❌</summary>
-  <p>
-    Osoba/e koje će rediti na ovom dijelu?
-  </p>
-  <progress value=0 max=100>
-</details>
 
 <!-- refferences -->
 
