@@ -1,6 +1,8 @@
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from torch.nn.functional import cross_entropy
 from torch.optim import Adam
 from tqdm import tqdm
 
@@ -103,3 +105,29 @@ class Trainer():
     def Correct(self, predictions, labels):
         return predictions.argmax(dim = 1).eq(labels).sum().item()
 
+    def Validation(self, model, dataLoader, epoch, data, reading = False):
+
+        if reading == False:
+
+            valArray = []
+            totalLoss, totalCorrect = 0, 0
+
+            with torch.no_grad():
+                model.eval()
+                loop = tqdm(enumerate(dataLoader), total = len(dataLoader), leave = False)
+                for index, (images, labels) in loop:
+
+                    predictions = model(images)
+                    loss = cross_entropy(predictions, labels)
+
+                    totalLoss += loss.item()
+                    totalCorrect += self.Correct(predictions, labels)
+
+                    # saving the data to the file so i can read it later
+                    # valArray.append([epoch, totalLoss, totalCorrect])
+
+                    loop.set_description(f"Epoch [{epoch}]")
+                    loop.set_postfix(loss = loss.item(), acc = torch.rand(1).item())
+
+            print(f"Epoch: {epoch}\t Total Validation Loss: {totalLoss}\t Total Validation Correct: {totalCorrect}")
+            return totalLoss, totalCorrect
