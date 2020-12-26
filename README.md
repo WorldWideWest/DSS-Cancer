@@ -61,6 +61,49 @@ Da bi transformirali ovaj tensor u vektor moramo uraditi konvoluciju tensora, a 
 * Podešavanje modela
 * Prezentiranje riješenja
 
+* Moramo posmatrati uopšteno, definisati naše probleme, način dubokog učenja
+
+Posmatrati sliku uopšteno daće nam bolji pogled na ciljeve i probleme s kojima se možemo susresti u toku čišćenja podataka, odabira načina učenja i modeliranja samog algoritma.
+Čišćenje podataka ima svoju sekciju i njome se nećemo previše baviti sad, ono čime ćemo se sad baviti jeste odabir načina učenja, a način učenja koji ćemo koristit za ovaj projekat je supervizirani oblik učenja. 
+
+On podrazumjeva da kad algoritam napravi predikciju mi upoređujemo predikcije sa stvarnim podacima, tako da se na taj način može optimizirati sama mreža kroz loss funkciju.
+Kao što smo već prethodno naveli koristit ćemo Konvolucionalne neuralne mreže koje će nam pomoći da pravimo naše predikcije.
+Što se tiče samog treninga,  on će se vršiti na cloud-u konkretno Azure. Budući da su nam sredstva ograničena mi možemo da treniramo algoritam do 15 sati maksimalno jer bi ostatak samo stvorio trošak kojeg ne možemo podmiriti.
+
+Tako da će algoritam biti lošije istreniran, te će davati lošije rezultate.
+
+*	Pribavljanje podataka
+
+Podaci će biti pribavljeni sa Kaggle.com, a radi se o memografijama pomoću kojih ćemo trenirati algoritam.  
+U ovoj fazi primjenjujemo nekoliko funkcija koje nam omogućavaju uvid u samu strukturu podataka. Ovdje se radi o memografijama čije su primarne dimenzije koje će biti ubacivane u algoritam (3, 50, 50).  Prvi broj u zagradi predstavlja koliko kanala boja imamo, u ovom slučaju je to 3 crveni, zeleni i plavi kanal.
+Drugi broj predstavlja širinu odnosno širina od 50 piksela I posljednji broj visinu od 50 piksela. Kada ovo sad proširimo imamo skupinu matrica (tensor):
+
+1.	Crvena matrica (1, 50, 50 )
+2.	Zelena matrica (1, 50, 50)
+3.	Plava matrica (1, 50, 50)
+
+Svaki piksel u okviru svake od ovih matrica ima svoju vrijednost, a ona se kreće od 0 – 255 gdje je nula crna boja, a 255 bjela boja.
+
+* Čišćenje i vizueliziranje podataka
+
+Da bi čistili podatke moramo napraviti neki algoritam koji će nam to omogućiti jer je ne moguće da “ručno” preradimo više od 40.000 memografija. To ćemo I uraditi koristeći OpenCV biblioteku koja nam omogućava učitavanje fotgrafija, a provjeru dimenzija fotografije ćemo uraditi kroz numpy biblioteku gdje ćemo pozvadti funkciju shape , te će nam ona dati dimenzije fotografije.
+
+Sve fotografije koje nemaju dimenziju (3, 50, 50) će biti izbrisane, te ćemo dobiti očišćen dataset.
+Nakon što smo riješili ovaj problem trebamo učitati fotografije u algoritam koji će nam služiti za predikciju. Budući da koristimo Pytorch, on ima biblioteku i za to, a ona se zove torchvision koji ima funkciju ImageFolder i DataLoder (DataLoader stvara strukturu podatka koja posjeduje fotografiju i njen korespondirajući tačan naziv)
+
+*	Priprema podataka za DL algoritam
+
+Nakon što smo riješili ovaj problem trebamo učitati fotografije u algoritam koji će nam služiti za predikciju. Budući da koristimo Pytorch, on ima biblioteku i za to, a ona se zove torchvision koji ima funkciju ImageFolder i DataLoder (DataLoader stvara strukturu podatka koja posjeduje fotografiju i njen korespondirajući tačan naziv).  
+
+*	Selektovanje modela i treniranje
+
+Definisat ćemo model od 8 Konvolucionalinh slojeva I 6 linearnih slojeva. Svaki sloj će imati pooling funkciju I RELU aktivacijsku funkciju, dok će optimizator biti Adam, a funkcija za gubitak će biti cross_entropy().
+
+*	Podešavanje modela
+
+Budući da nećemo imati dovoljno vremena da istreniramo algoritam jedino što možemo uraditi da optimiziramo algoritam je da podešavamo procenat učenja. Njega ćemo podeštavati kroz optimizator pozivajući funkciju scheduler.
+
+
 <table>
   <thead>
     <tr>
